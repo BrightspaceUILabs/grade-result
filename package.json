@@ -24,7 +24,7 @@
   "devDependencies": {
     "@brightspace-ui/visual-diff": "^1",
     "@open-wc/testing": "^2",
-    "@open-wc/testing-karma": "^3",
+    "@open-wc/testing-karma": "^4",
     "@webcomponents/webcomponentsjs": "^2",
     "babel-eslint": "^10",
     "deepmerge": "^3",
@@ -34,7 +34,7 @@
     "eslint-plugin-html": "^6",
     "eslint-plugin-lit": "^1",
     "eslint-plugin-sort-class-members": "^1",
-    "karma-sauce-launcher": "^2",
+    "karma-sauce-launcher": "^4",
     "lit-analyzer": "^1",
     "puppeteer": "^1",
     "sinon": "^9.0.2"
