@@ -16,7 +16,7 @@ const customLaunchers = {
 	safari: {
 		base: 'SauceLabs',
 		browserName: 'safari',
-		platform: 'OS X 10.15'
+		platform: 'OS X 10.13'
 	},
 	edge: {
 		base: 'SauceLabs',
