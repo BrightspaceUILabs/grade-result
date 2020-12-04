@@ -1,20 +1,11 @@
 language: node_js
 node_js: node
-addons:
-  chrome: stable
+cache:
+  npm: false
 jobs:
   include:
-  - stage: code-tests
-    script:
-    - npm run lint
-    - |
-      if [ $TRAVIS_PULL_REQUEST != false ] && [ $TRAVIS_SECURE_ENV_VARS == true ]; then
-        echo "Pull request with secure environment variables, running Sauce tests...";
-        npm run test:sauce || travis_terminate 1;
-      else
-        echo "Not a pull request and/or no secure environment variables, running headless tests...";
-        npm run test:headless || travis_terminate 1;
-      fi
+  - stage: Empty Stage (Temporary)
+    script: echo "Empty first stage because visual-diff needs to be 2nd"
   - stage: visual-difference-tests
     script:
     - |
@@ -22,28 +13,11 @@ jobs:
         echo "Running visual difference tests...";
         npm run test:diff || travis_terminate 1;
       fi
-  - stage: update-version
-    script: frauci-update-version && export TRAVIS_TAG=$(frauci-get-version)
-
-deploy:
-  provider: npm
-  email: d2ltravisdeploy@d2l.com
-  api_key:
-    secure: BqP7PUmV5/SsQFaB6rtnx/yLizdJ7JRLGtUDS8RMsmMHl3s28srrRl10o30f6B55nHIONfujYddWjGJQCI1qjUNcrrB5dDs5QZ4ufYb0v0KwmhMGhOxgNyZqOkEyZ0SwR5jari5s4IS5xoG2UoEWEj0V/ij4OPj+KWpV6uxDWY+NCsc2+Ew3HoZA2lopOcr6N+iKDov4HcVZdwh51rNH9aG8XFHBMagndO5PP1lbovlP7/rQGBolgXjFIDvrI36YabxeUz7zofB2XnVJE7kDnCD4yig+kGmDNIWW1iHJb3YRlWuoeYgCvVBpliuRY2lQdPfJt5Q4xL5rJVw7drndT4FbVfa7ysKcNspsfcB3icVooXLjJGsnIAO96JjqPl56QKsYhEf3U2NQSXnekC1skE/SUy3HT781imiLC9oc/3R9pCA/YkJBlPJ7LFyef+p7QecTYGDPccH2n0s8iudv/0MHkU/wqL/3DkGk38UC9lNYoxAH5ddea1fvxbEBs8Gc40B0S+Vh9K0YO8z0qEbpjz4BjonCxpZ9YCJ2WX1JoFEZaFCRV0+TVdZa8Mq5zgwhTuPpXtpI52RbSoRo5Zrt/2RCEgvk9UgIc3E+OWatblLmw5uNREdN32ZwODMsQEaX2TVRRoEaQVdL9GIItWQ0RJ8kscs5Me05DreQgsR1MDQ=
-  on:
-    tags: true
-    repo: BrightspaceUILabs/grade-result
 env:
   global: 
-  - SAUCE_USERNAME: Desire2Learn
-  - OWNER_NAME: BrightspaceUILabs
-  - REPO_NAME: grade-result
-  - DEFAULT_INCREMENT: patch
   # GITHUB_RELEASE_TOKEN
   - secure: IAYzZasFCh2aOw6ziYuULpEOJ4TMQoiqCmJxOEcdZaCM5iw+DRVBCtIK7te/RZd6O+jwrXHyxuZ106Hi5jTu38We0CqFDXsa+99PdZKzmxPYvx/+OWDXtfol2dBDh8ZpphoGKjFC2jgj5y9uNl/5EMikhTgi3Mt3BjX+a9Ge8blShu+chqecJR3B+igptZhMafSzm18jx/b15JtOJyMZ8348EXaH+r4JiKbAjud+YyiEUf3bQ0HBOi0IR6fRwqjipL5ZvQbyMw4mQ7vqKM1HN8l/p+PQu+ib0QKMzZ4/8FqlHkHkejwqrSpvbmSqkyUNa8/za78QZ+nDi2HwsbmgcTLBsTuYhAH5xnIzr3LAeN/zgu+c6LkKApMCAHunsKVqonQIaYHLpccjDrj9kulQPpv+ja7L3WtL8vo+PIbqdq9TAJtKgfeA6cqiqLPeTHGJkhK9YhxZO+D+SgH/552I7aKTl32rhk4oML3yctBU+VaoVZZXzGzdXk0N0df5O6h890IHhCwZF5WbzMvD6AeyDLt/ZMynwrh9E8Xnb5+RmQWMTiiwDvgZOuvDVQ06AuFuVHM97jzEo1AtwYs/BHXJ+MI4hFYcyWoPgLiMHosTU5STfQebJbridO03iZfTSLle772eTVHXItE5FmXsH/ydzX0BE4scocePCNZnXGCZfJg=
   # VISUAL_DIFF_S3_ID
   - secure: fc6GC/+QWIhfvydydOPs5NtfcwzEuP/cbFt0tvDc9GokGDtfmL6mxB9QbOD/Pk4/7f3kv7gY2oMOPEEwB3+HbKZZWRsjgE2ZVgyTVIw/tPJz45t5jeUtg1u39bfNoRvxF73wwqt3Szakg5u3DkRlN4nw+tdktO/cmodeUhIVRDj5kfnX1iNg0jQuxwbTvctm8XcI5NdHBs7smARhUTSGdf0riJnXvrbTgAY6Q2YOgq5t5gd2gS5Zu5/hJe4GlK6ahu7mlc9qAj8eVPxiX/9r7VsnH4vMOBfGI1R56wxQjN8QYATDnaLoMCnC6GtveEAN9GXfj5jWf2G61ERraSRtn7UrdV830a+ZfkP2NhM4s8iIc9da6emUtiFjVv2+AoOA3XeXkGm1I+uikYzCW8s+mjBZrImAI2Yt6gKmpWgkijNDi9zzQ3CIFGUeRAXtk18Ly1ZS7FK16AQX84tB6NhvUoqPO/UMQaGr57pFZ3Hk9RC1jvQJvYdVFEWCSwIubQLPjZFa+fbeZY7O7SDtNR8NOqe5cxzEWZuHrazUAAQou+t06wIurBeKAmzblyTXuGwc5Q22SJwA/z+28c4TR4JDyoTVRDEusOaQzzvgziFIQVQ9Wy681fAUWo/OfTYlfrYFw7bxsdMeKSoAhGMoB+a7ct8NK9ZVRYkVfbhdWmq4pkk=
   # VISUAL_DIFF_S3_SECRET
   - secure: Y+B92C6//i+jLGZjjg9zq2c4gYlOLtWkRq5MeGnsMWXpEBYSBBhAc6Bob4UbntDnAkDESEhf4yLwKFKKnamLCV47hnhSQRy8DEK3i0GgiYPsvfHvB5nW+3dkqSfPZw6p8NB1TtMbvTZnxcn8Cq+SRddEVrIPqwtqpuOXla1mtX5zAXtD5a+AaFoE4MoFFBM/rM3eznpZ9S4ZdWF+JBWzGv2g7Rlxobe/AIxAnc5x3w2xo0Jvy7Df3nGfT7+FFXQchnBmrLRXzzbfNREunQqoYkKdFgof7ReMb9F93qkuUXusw4+s6Cc08LhEzHuWwJf09qHgnpfPODPg3ykGT+TQteeFeSD/oPU2hc0r7Cyw7nji2bIoMmfrj2mvrd6K3P+l/xScsCG29zFRnGG6yQqSb0Cb8O3QuqsBFf0ODAiL/bpSDfKWp05nhUnTkk5z6P9DjUt7cWnhyx8tvvc8ZPcpBOKjAfoDT41cVTpzziCmgrw1+W13S/KMpSYq0ohOfYFPiuNsW99AsFtg+GD3QTuAy9Lfus9VoHzBO4vrMK6NZSYVpYNAtBPdwFd6NC/7/AYdKpr2x/5k1eEhPD11VrQXjtuCxmpUUKIGBGZs99MmUCyQUiN8VZ8RxtURkkg4+vEE39AgtcVSQ17Nlj5nIun3Jg41/B8JaIrp4vKpqL4vtmw=
-  # SAUCE_ACCESS_KEY
-  - secure: Pji7IWsUHIyeP13m9emp3LvKL+m2f/oBebX6f/xD05wm6nUE9hr8eiwC0qVyzRJXxaW8S7vu8xTb+R3gkS4cp1FiZeELpcOQnU3svp3L2Hp+E2XUjKZ/4HlPaBQ8FQLZMoYhWgGGyIOsYpVkHqIDh87sw6xlHfonNGBkp2oQeUyHAOhrMTEqzNwz0HuzZPl+UG/S4P7UNQu/VE6SniMIujh8ogh+sUYDxxS/4sCQx1KtS+jRDSWNuCmGlhAGTwsMlsH24/g9P8EmHJS4KIr1Qain5zF+EBKddLZWKgQqI0Gocju/0emms5M+/0Np287HSexzZ1LQyHBlm4OFQCSq9n74u0dFPkjLkQXZFYE+V3h+6Tl84Nk+AGiL3eAsF1Nc7Fvmw/CWgV4hWk8QXF5a93Dz6gtSm8LcVNh5Qo8Hd89jhXllvd3p0ZMgIvOJY3if/juL5KZBikkB3pJwO7HXVAOunM2p8qVIIxJ8AXRvS3pJZ2Gy1nnRVfTtCab57cI2vKAVVPaQHlgCms1BKS3GGdlQSqcan/d/lC6sUUlWNxvl2CM2L3jUb2rmZ9PG7bYYkJ5kYadJWM6W4oRGRAOas6BCagiKBd7bKgowZr1hg2h3YNGOvbZor/q/Y/oHIXSEifz8gdEe0rhLXWFTQ63QwVPs1WcXpRXABP7DQehoXjw=
