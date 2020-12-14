@@ -11,8 +11,7 @@ describe('write enabled visual diff tests', () => {
 
 	before(async() => {
 		browser = await puppeteer.launch();
-		page = await browser.newPage();
-		await page.setViewport({width: 800, height: 800, deviceScaleFactor: 2});
+		page = await visualDiff.createPage(browser, { viewport: { width: 800, height: 1100 } });
 		await page.goto(`${visualDiff.getBaseUrl()}/test/perceptual/d2l-grade-result-write-enabled.visual-diff.html`, {waitUntil: ['networkidle0', 'load']});
 		await page.bringToFront();
 		await visualDiff.disableAnimations(page);
