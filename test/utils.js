@@ -23,7 +23,7 @@ export const getNumericScore = (el) => {
 };
 
 export const getNumericScoreInput = (el) => {
-	return getNumericScore(el).shadowRoot.querySelector('d2l-input-text');
+	return getNumericScore(el).shadowRoot.querySelector('d2l-input-number');
 };
 
 export const getLetterScore = (el) => {

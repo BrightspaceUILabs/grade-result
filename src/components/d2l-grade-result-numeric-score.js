@@ -1,4 +1,4 @@
-import '@brightspace-ui/core/components/inputs/input-text';
+import '@brightspace-ui/core/components/inputs/input-number';
 import { bodyStandardStyles, labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { css, html, LitElement } from 'lit-element';
 import { inputLabelStyles } from '@brightspace-ui/core/components/inputs/input-label-styles.js';
@@ -49,15 +49,15 @@ export class D2LGradeResultNumericScore extends LitElement {
 
 				${!this.readOnly ? html`
 					<div class="d2l-grade-result-numeric-score-score">
-						<d2l-input-text
-							type="number"
+						<d2l-input-number
 							aria-label="Grade Score"
 							value="${this.scoreNumerator}"
 							min="0"
+							max-fraction-digits="2"
 							novalidate
 							step="any"
 							@change=${this._onGradeChange}
-						></d2l-input-text>
+						></d2l-input-number>
 					</div>
 
 					<div class="d2l-grade-result-numeric-score-score-text">
