@@ -153,7 +153,7 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 		return html``;
 	}
 
-	_renderGradeCalculationMethod() {
+	_renderSubtitle() {
 		if (this.subtitleText) {
 			return html`<div class="d2l-grade-result-presentational-subtitle d2l-body-small">
 					${this.subtitleText}
@@ -182,7 +182,7 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 				${this._renderTitle()}
 			</div>
 
-			${this._renderGradeCalculationMethod()}
+			${this._renderSubtitle()}
 
 			<div class="d2l-grade-result-presentational-container">
 				${this._renderScoreComponent()}
