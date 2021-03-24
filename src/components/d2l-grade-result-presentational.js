@@ -3,6 +3,7 @@ import './d2l-grade-result-numeric-score.js';
 import './d2l-grade-result-letter-score.js';
 import '@brightspace-ui/core/components/button/button-subtle.js';
 import { css, html, LitElement } from 'lit-element';
+import { bodySmallStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import getLocalizationTranslations from './locale.js';
 import { GradeType } from '../controller/Grade.js';
 import { LocalizeMixin } from '@brightspace-ui/core/mixins/localize-mixin.js';
@@ -25,12 +26,13 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 			isManualOverrideActive: { type: Boolean },
 			hideTitle: { type: Boolean },
 			customManualOverrideText: { type: String },
-			customManualOverrideClearText: { type: String }
+			customManualOverrideClearText: { type: String },
+			subtitleText: { type: String }
 		};
 	}
 
 	static get styles() {
-		return css`
+		return [ bodySmallStyles, css`
 			.d2l-grade-result-presentational-container {
 				display: flex;
 				flex-direction: row;
@@ -38,7 +40,11 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 			}
 			.d2l-grade-result-presentational-title-container {
 			}
-		`;
+			.d2l-grade-result-presentational-subtitle {
+				margin-top: -4px;
+				margin-bottom: 4px;
+			}
+		`];
 	}
 	static async getLocalizeResources(langs) {
 		return await getLocalizationTranslations(langs);
@@ -55,6 +61,7 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 		this.hideTitle = false;
 		this.customManualOverrideText = undefined;
 		this.customManualOverrideClearText = undefined;
+		this.subtitleText = undefined;
 	}
 
 	_onGradeButtonClick() {
@@ -146,6 +153,15 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 		return html``;
 	}
 
+	_renderGradeCalculationMethod() {
+		if (this.subtitleText) {
+			return html`<div class="d2l-grade-result-presentational-subtitle d2l-body-small">
+					${this.subtitleText}
+				</div>
+			`;
+		}
+	}
+
 	_onManualOverrideClick() {
 		this.dispatchEvent(new CustomEvent('d2l-grade-result-manual-override-click', {
 			composed: true,
@@ -166,6 +182,8 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 				${this._renderTitle()}
 			</div>
 
+			${this._renderGradeCalculationMethod()}
+
 			<div class="d2l-grade-result-presentational-container">
 				${this._renderScoreComponent()}
 
@@ -177,7 +195,7 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 						@d2l-grade-result-icon-button-click=${this._onGradeButtonClick}
 					></d2l-grade-result-icon-button>
 				` : html``}
-				
+
 				${this.includeReportsButton ? html`
 					<d2l-grade-result-icon-button
 						.tooltipText=${this.reportsButtonTooltip}

@@ -62,6 +62,7 @@ If you are only interested in rendering the presentational layer of the componen
 | `hideTitle`                       | All            | `boolean`                   | `false`     | This property will hide the "Overall Grade" title above the component. |
 | `customManualOverrideText`        | All            | `string`                    | `undefined` | This properly will substitute the stock text on the "Manual Override" button. |
 | `customManualOverrideClearText`   | All            | `string`                    | `undefined` | This properly will substitute the stock text on the "Clear Manual Override" button. |
+| `subtitleText`                    | All            | `string`                    | `undefined` | This properly will show the given text under the title. |
 
 ## Events
 
