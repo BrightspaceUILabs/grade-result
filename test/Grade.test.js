@@ -194,7 +194,14 @@ describe('Grade tests', () => {
 			});
 		});
 
-		it('throws error for null score', () => {
+		it('returns empty string for undefined score', () => {
+			assert.doesNotThrow(() => {
+				grade.setScore(undefined);
+				assert.equal(grade.getScore(), '');
+			});
+		});
+
+		it('does not throw for null score', () => {
 			assert.doesNotThrow(() => {
 				grade.setScore(null);
 			});

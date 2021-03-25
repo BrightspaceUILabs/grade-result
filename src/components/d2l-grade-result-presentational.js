@@ -160,6 +160,7 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 				</div>
 			`;
 		}
+		return html``;
 	}
 
 	_onManualOverrideClick() {
