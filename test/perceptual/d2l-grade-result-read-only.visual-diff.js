@@ -55,4 +55,8 @@ describe('read only visual diff tests', () => {
 		await testDiff(visualDiff, page, '#read-only-letter-grade-icons-tooltips', this.test.fullTitle(), false, true);
 	});
 
+	it('d2l-labs-d2l-grade-result-with-subtitle', async function() {
+		await testDiff(visualDiff, page, '#d2l-labs-d2l-grade-result-with-subtitle', this.test.fullTitle());
+	});
+
 });
