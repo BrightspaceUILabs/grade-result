@@ -41,15 +41,15 @@ export class Grade {
 	}
 
 	_parseNumberGrade(score, outOf) {
-		if (isNaN(score) || score === undefined) {
-			throw new Error(GradeErrors.INVALID_SCORE);
-		}
-
 		if ((!outOf || isNaN(outOf)) && outOf !== 0) {
 			throw new Error(GradeErrors.INVALID_OUT_OF);
 		}
 
-		if (typeof score === 'string') {
+		if (score === undefined) {
+			score = '';
+		} else if (isNaN(score)) {
+			throw new Error(GradeErrors.INVALID_SCORE);
+		} else if (typeof score === 'string') {
 			score = Number(score);
 		}
 
