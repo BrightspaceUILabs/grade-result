@@ -4,6 +4,13 @@ import '../src/components/d2l-grade-result-presentational.js';
 import { expect, fixture, html } from '@open-wc/testing';
 import { getGradesButton, getLetterScore, getLetterScoreSelect, getManualOverrideButton, getNumericScore, getNumericScoreInput, getReportsButton } from './utils.js';
 
+const letterGradeOptions = {
+	0: {'LetterGrade': 'None', 'PercentStart': null},
+	1: {'LetterGrade': 'A', 'PercentStart': '80'},
+	2: {'LetterGrade': 'B', 'PercentStart': '65'},
+	3: {'LetterGrade': 'C', 'PercentStart': '50'},
+};
+
 const componentManualOverride = html`
 	<d2l-labs-d2l-grade-result-presentational
 		gradeType="Numeric"
@@ -46,7 +53,7 @@ const componentLetterScore = html`
 	<d2l-labs-d2l-grade-result-presentational
 		gradeType="LetterGrade"
 		labelText="Overall Grade"
-		.letterGradeOptions=${['A', 'B', 'C']}
+		.letterGradeOptions=${letterGradeOptions}
 		selectedLetterGrade="C"
 	></d2l-labs-d2l-grade-result-presentational>
 `;
@@ -129,7 +136,7 @@ describe('d2l-grade-result-presentational', () => {
 		return new Promise((resolve, reject) => {
 			fixture(componentLetterScore).then(el => {
 				const event = 'd2l-grade-result-letter-score-selected';
-				const value = 'B';
+				const value = '2';
 				el.addEventListener(event, (e) => {
 					const score = getLetterScoreSelect(e.target);
 					if (score.value === value) {
