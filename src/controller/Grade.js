@@ -9,6 +9,7 @@ export const GradeErrors = {
 	INVALID_SCORE: 'Invalid score provided',
 	INVALID_OUT_OF: 'Invalid outOf provided',
 	INVALID_LETTER_GRADE: 'Invalid letterGrade provided',
+	INVALID_LETTER_GRADE_ID: 'Invalid letterGradeId provided',
 	INVALID_LETTER_GRADE_OPTIONS: 'Invalid letterGradeOptions provided',
 	LETTER_GRADE_NOT_IN_OPTIONS: 'letterGrade must be one of the letterGradeOptions provided'
 };
@@ -29,7 +30,7 @@ export class Grade {
 		if ((!letterGrade || typeof letterGrade !== 'string') && letterGrade !== null && letterGrade !== '') {
 			throw new Error(GradeErrors.INVALID_LETTER_GRADE);
 		}
-		if (!letterGradeOptions || typeof letterGradeOptions !== 'object' || letterGradeOptions.length === 0) {
+		if (!letterGradeOptions || typeof letterGradeOptions !== 'object' || Object.keys(letterGradeOptions).length === 0) {
 			throw new Error(GradeErrors.INVALID_LETTER_GRADE_OPTIONS);
 		}
 
@@ -93,7 +94,7 @@ export class Grade {
 
 	_parseLetterGrade(letterGradeId, letterGradeOptions) {
 		if (!letterGradeId && letterGradeId !== 0) {
-			throw new Error(GradeErrors.INVALID_LETTER_GRADE);
+			throw new Error(GradeErrors.INVALID_LETTER_GRADE_ID);
 		}
 
 		if (!letterGradeOptions || Object.keys(letterGradeOptions).length === 0) {
