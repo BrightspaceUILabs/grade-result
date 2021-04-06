@@ -6,7 +6,7 @@ export class D2LGradeResultLetterScore extends LitElement {
 
 	static get properties() {
 		return {
-			availableOptions: { type: Array },
+			availableOptions: { type: Object },
 			selectedOption: { type: String },
 			readOnly: { type: Boolean }
 		};
@@ -29,18 +29,20 @@ export class D2LGradeResultLetterScore extends LitElement {
 
 	constructor() {
 		super();
-		this.availableOptions = [];
+		this.availableOptions = null;
 		this.selectedOption = '';
 	}
 
 	_renderOptions() {
-		return this.availableOptions.map((option) => {
-			if (this.selectedOption === option) {
-				return html`<option selected value=${option}>${option}</option>`;
+		const itemTemplate = [];
+		for (const [id, option] of Object.entries(this.availableOptions)) {
+			if (this.selectedOption === id) {
+				itemTemplate.push(html`<option selected value=${id}>${option.LetterGrade}</option>`);
 			} else {
-				return html`<option value=${option}>${option}</option>`;
+				itemTemplate.push(html`<option value=${id}>${option.LetterGrade}</option>`);
 			}
-		});
+		}
+		return itemTemplate;
 	}
 
 	_onOptionSelected(e) {
@@ -51,6 +53,12 @@ export class D2LGradeResultLetterScore extends LitElement {
 				value: e.target.value
 			}
 		}));
+	}
+
+	_selectedOptionText() {
+		if (this.availableOptions[this.selectedOption]) {
+			return this.availableOptions[this.selectedOption].LetterGrade;
+		}
 	}
 
 	render() {
@@ -68,7 +76,7 @@ export class D2LGradeResultLetterScore extends LitElement {
 		} else {
 			return html`
 				<div class="d2l-grade-result-letter-score-score-read-only">
-					<span class="d2l-body-standard">${this.selectedOption}</span>
+					<span class="d2l-body-standard">${this._selectedOptionText()}</span>
 				</div>
 			`;
 		}

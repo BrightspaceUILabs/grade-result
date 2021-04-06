@@ -15,7 +15,7 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 			labelText: { type: String },
 			scoreDenominator: { type: Number },
 			scoreNumerator: { type: Number },
-			letterGradeOptions: { type: Array },
+			letterGradeOptions: { type: Object },
 			selectedLetterGrade: { type: String },
 			includeGradeButton: { type: Boolean },
 			includeReportsButton: { type: Boolean },

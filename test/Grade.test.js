@@ -1,6 +1,13 @@
 import { Grade, GradeErrors, GradeType } from '../src/controller/Grade.js';
 import { assert } from '@open-wc/testing';
 
+const letterGradeOptions = {
+	0: {'LetterGrade': 'None', 'PercentStart': null},
+	1: {'LetterGrade': 'A', 'PercentStart': '80'},
+	2: {'LetterGrade': 'B', 'PercentStart': '65'},
+	3: {'LetterGrade': 'C', 'PercentStart': '50'},
+};
+
 describe('Grade tests', () => {
 	describe('properly calling constructor', () => {
 		it('initializes properly for a numeric score', () => {
@@ -13,12 +20,12 @@ describe('Grade tests', () => {
 		});
 
 		it('initializes properly for a letter score', () => {
-			const grade = new Grade(GradeType.Letter, null, null, 'A', ['A', 'B', 'C']);
+			const grade = new Grade(GradeType.Letter, null, null, 'A', letterGradeOptions);
 			assert.equal(grade.isLetterGrade(), true);
 			assert.equal(grade.isNumberGrade(), false);
 			assert.equal(grade.getScoreType(), GradeType.Letter);
-			assert.equal(grade.getScore(), 'A');
-			assert.deepEqual(grade.getScoreOutOf(), ['A', 'B', 'C']);
+			assert.equal(grade.getScore(), 1);
+			assert.deepEqual(grade.getScoreOutOf(), letterGradeOptions);
 		});
 	});
 
@@ -59,7 +66,7 @@ describe('Grade tests', () => {
 
 		it('can handle lettergrade', () => {
 			assert.doesNotThrow(() => {
-				const grade = new Grade('lettergrade', null, null, 'A', ['A', 'B', 'C']);
+				const grade = new Grade('lettergrade', null, null, 'A', letterGradeOptions);
 				assert.isTrue(grade.isLetterGrade());
 				assert.isFalse(grade.isNumberGrade());
 			});
@@ -108,19 +115,19 @@ describe('Grade tests', () => {
 	describe('throws an error if improper score/outOf are provided for letter scores', () => {
 		it('lettergrade as null', () => {
 			assert.doesNotThrow(() => {
-				new Grade(GradeType.Letter, null, null, null, ['A', 'B', 'C']);
+				new Grade(GradeType.Letter, null, null, null, letterGradeOptions);
 			});
 		});
 
 		it('lettergrade as number', () => {
 			assert.throws(() => {
-				new Grade(GradeType.Letter, null, null, 10, ['A', 'B', 'C']);
+				new Grade(GradeType.Letter, null, null, 10, letterGradeOptions);
 			}, GradeErrors.INVALID_LETTER_GRADE);
 		});
 
 		it('lettergrade as array of strings', () => {
 			assert.throws(() => {
-				new Grade(GradeType.Letter, null, null, ['A', 'B'], ['A', 'B', 'C']);
+				new Grade(GradeType.Letter, null, null, ['A', 'B'], letterGradeOptions);
 			}, GradeErrors.INVALID_LETTER_GRADE);
 		});
 
@@ -157,8 +164,8 @@ describe('Grade tests', () => {
 		});
 
 		it('getScore works properly for letter scores', () => {
-			const grade = new Grade(GradeType.Letter, null, null, 'A', ['A', 'B', 'C']);
-			assert.equal(grade.getScore(), 'A');
+			const grade = new Grade(GradeType.Letter, null, null, 'A', letterGradeOptions);
+			assert.equal(grade.getScore(), 1);
 		});
 
 		it('getScoreOutOf works properly for numeric scores', () => {
@@ -167,14 +174,14 @@ describe('Grade tests', () => {
 		});
 
 		it('getScoreOutOf works properly for letter scores', () => {
-			const grade = new Grade(GradeType.Letter, null, null, 'A', ['A', 'B', 'C']);
-			assert.deepEqual(grade.getScoreOutOf(), ['A', 'B', 'C']);
+			const grade = new Grade(GradeType.Letter, null, null, 'A', letterGradeOptions);
+			assert.deepEqual(grade.getScoreOutOf(), letterGradeOptions);
 		});
 	});
 
 	it('ensures that the letterGrade is one of the LetterGradeOptions', () => {
 		assert.throws(() => {
-			new Grade(GradeType.Letter, null, null, 'A', ['B', 'C']);
+			new Grade(GradeType.Letter, null, null, 'D', letterGradeOptions);
 		}, GradeErrors.LETTER_GRADE_NOT_IN_OPTIONS);
 	});
 
@@ -221,12 +228,12 @@ describe('Grade tests', () => {
 	});
 
 	it('properly updates a letter grade', () => {
-		const grade = new Grade(GradeType.Letter, null, null, 'A', ['A', 'B', 'C']);
+		const grade = new Grade(GradeType.Letter, null, null, 'A', letterGradeOptions);
 
 		it('sets the letter grade properly', () => {
 			assert.doesNotThrow(() => {
 				grade.setScore('B');
-				assert.equal(grade.getScore(), 'B');
+				assert.equal(grade.getScore(), 2);
 			});
 		});
 
@@ -277,7 +284,7 @@ describe('Grade tests', () => {
 
 		it('can handle letterGrade as null', () => {
 			assert.doesNotThrow(() => {
-				new Grade(GradeType.Letter, null, null, null, ['A', 'B', 'C']);
+				new Grade(GradeType.Letter, null, null, null, letterGradeOptions);
 			});
 		});
 	});

@@ -36,15 +36,34 @@
 			</div>
 
 			<div id="write-enabled-letter-grade-no-icons">
-				<d2l-labs-d2l-grade-result-presentational gradeType="LetterGrade" labelText="Overall Grade" letterGradeOptions='["A", "B", "C"]' selectedLetterGrade="C"></d2l-labs-d2l-grade-result-presentational>
+				<d2l-labs-d2l-grade-result-presentational
+					gradeType="LetterGrade"
+					labelText="Overall Grade"
+					letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+					selectedLetterGrade="2">
+				</d2l-labs-d2l-grade-result-presentational>
 			</div>
 
 			<div id="write-enabled-letter-grade-icons">
-				<d2l-labs-d2l-grade-result-presentational gradeType="LetterGrade" labelText="Overall Grade" letterGradeOptions='["A", "B", "C"]' includeGradeButton includeReportsButton></d2l-labs-d2l-grade-result-presentational>
+				<d2l-labs-d2l-grade-result-presentational
+					gradeType="LetterGrade"
+					labelText="Overall Grade"
+					letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+					includeGradeButton
+					includeReportsButton>
+				</d2l-labs-d2l-grade-result-presentational>
 			</div>
 
 			<div id="write-enabled-letter-grade-icons-tooltips">
-				<d2l-labs-d2l-grade-result-presentational gradeType="LetterGrade" labelText="Overall Grade" letterGradeOptions='["A", "B", "C"]' includeGradeButton includeReportsButton gradeButtonTooltip="Assignment 1 Grade Item Attached" reportsButtonTooltip="Class and user statistics"></d2l-labs-d2l-grade-result-presentational>
+				<d2l-labs-d2l-grade-result-presentational
+					gradeType="LetterGrade"
+					labelText="Overall Grade"
+					letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+					includeGradeButton
+					includeReportsButton
+					gradeButtonTooltip="Assignment 1 Grade Item Attached"
+					reportsButtonTooltip="Class and user statistics">
+				</d2l-labs-d2l-grade-result-presentational>
 			</div>
 
 	</body>

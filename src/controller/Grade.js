@@ -9,6 +9,7 @@ export const GradeErrors = {
 	INVALID_SCORE: 'Invalid score provided',
 	INVALID_OUT_OF: 'Invalid outOf provided',
 	INVALID_LETTER_GRADE: 'Invalid letterGrade provided',
+	INVALID_LETTER_GRADE_ID: 'Invalid letterGradeId provided',
 	INVALID_LETTER_GRADE_OPTIONS: 'Invalid letterGradeOptions provided',
 	LETTER_GRADE_NOT_IN_OPTIONS: 'letterGrade must be one of the letterGradeOptions provided'
 };
@@ -20,8 +21,35 @@ export class Grade {
 		if (this.isNumberGrade()) {
 			this._parseNumberGrade(score, outOf);
 		} else {
-			this._parseLetterGrade(letterGrade, letterGradeOptions);
+			const letterGradeId = this._getLetterGradeIdFromLetterGrade(letterGrade, letterGradeOptions);
+			this._parseLetterGrade(letterGradeId, letterGradeOptions);
 		}
+	}
+
+	_getLetterGradeIdFromLetterGrade(letterGrade, letterGradeOptions) {
+		if ((!letterGrade || typeof letterGrade !== 'string') && letterGrade !== null && letterGrade !== '') {
+			throw new Error(GradeErrors.INVALID_LETTER_GRADE);
+		}
+		if (!letterGradeOptions || typeof letterGradeOptions !== 'object' || Object.keys(letterGradeOptions).length === 0) {
+			throw new Error(GradeErrors.INVALID_LETTER_GRADE_OPTIONS);
+		}
+
+		let letterGradeId;
+
+		// this is the "None" case which has the id 0
+		if (letterGrade === '' || letterGrade === null) {
+			letterGradeId = 0;
+		} else {
+			letterGradeId = Object.keys(letterGradeOptions).find(key =>
+				letterGradeOptions[key].LetterGrade === letterGrade
+			);
+		}
+
+		if (letterGradeId === undefined) {
+			throw new Error(GradeErrors.LETTER_GRADE_NOT_IN_OPTIONS);
+		}
+
+		return letterGradeId;
 	}
 
 	_parseScoreType(scoreType) {
@@ -59,26 +87,24 @@ export class Grade {
 
 		this.score = score;
 		this.outOf = outOf;
+		this.letterGradeId = null;
 		this.letterGrade = null;
 		this.letterGradeOptions = null;
 	}
 
-	_parseLetterGrade(letterGrade, letterGradeOptions) {
-		if ((!letterGrade || typeof letterGrade !== 'string') && letterGrade !== null) {
-			throw new Error(GradeErrors.INVALID_LETTER_GRADE);
+	_parseLetterGrade(letterGradeId, letterGradeOptions) {
+		if (!letterGradeId && letterGradeId !== 0) {
+			throw new Error(GradeErrors.INVALID_LETTER_GRADE_ID);
 		}
 
-		if (!letterGradeOptions || !Array.isArray(letterGradeOptions) || letterGradeOptions.length === 0) {
+		if (!letterGradeOptions || Object.keys(letterGradeOptions).length === 0) {
 			throw new Error(GradeErrors.INVALID_LETTER_GRADE_OPTIONS);
-		}
-
-		if (letterGrade !== null && !letterGradeOptions.includes(letterGrade)) {
-			throw new Error(GradeErrors.LETTER_GRADE_NOT_IN_OPTIONS);
 		}
 
 		this.score = null;
 		this.outOf = null;
-		this.letterGrade = letterGrade;
+		this.letterGradeId = letterGradeId;
+		this.letterGrade = letterGradeOptions[letterGradeId].LetterGrade;
 		this.letterGradeOptions = letterGradeOptions;
 	}
 
@@ -95,7 +121,7 @@ export class Grade {
 	}
 
 	getScore() {
-		return this.isNumberGrade() ? this.score : this.letterGrade;
+		return this.isNumberGrade() ? this.score : this.letterGradeId;
 	}
 
 	getScoreOutOf() {
