@@ -50,12 +50,12 @@ export class D2LGradeResultNumericScore extends LitElement {
 				${!this.readOnly ? html`
 					<div class="d2l-grade-result-numeric-score-score">
 						<d2l-input-number
-							aria-label="Grade Score"
+							label="Grade Score"
+							label-hidden
 							value="${this.scoreNumerator}"
 							min="0"
 							max-fraction-digits="2"
 							novalidate
-							step="any"
 							@change=${this._onGradeChange}
 						></d2l-input-number>
 					</div>
