@@ -27,8 +27,17 @@ export class D2LGradeResultNumericScore extends LitElement {
 				margin-right: 0.5rem;
 			}
 			.d2l-grade-result-numeric-score-score-text {
-				width: 2.8rem;
+				margin-left: 0.5rem;
+				margin-right: 0.25rem;
 				text-align: center;
+			}
+			:host([dir="rtl"]) .d2l-grade-result-numeric-score-score-read-only {
+				margin-left: 0.5rem;
+				margin-right: 0rem;
+			}
+			:host([dir="rtl"]) .d2l-grade-result-numeric-score-score-text {
+				margin-right: 0.5rem;
+				margin-left: 0.25rem;
 			}
 		`];
 	}
