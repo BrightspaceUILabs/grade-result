@@ -27,7 +27,7 @@ export class D2LGradeResultNumericScore extends LitElement {
 				margin-right: 0.5rem;
 			}
 			.d2l-grade-result-numeric-score-score-text {
-				margin-left: 0.75rem;
+				margin-left: 0.5rem;
 				margin-right: 0.25rem;
 				text-align: center;
 			}
