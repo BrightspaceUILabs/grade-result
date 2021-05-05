@@ -32,19 +32,13 @@ export class D2LGradeResultNumericScore extends LitElement {
 				text-align: center;
 			}
 			:host([dir="rtl"]) .d2l-grade-result-numeric-score-score-read-only {
-				max-width: 5.25rem;
 				margin-left: 0.5rem;
-			}
-			:host([dir="rtl"]) .d2l-grade-result-numeric-score-score-read-only {
-				max-width: 5.25rem;
-				margin-left: 0.5rem;
+				margin-right: 0rem;
 			}
 			:host([dir="rtl"]) .d2l-grade-result-numeric-score-score-text {
 				margin-right: 0.5rem;
 				margin-left: 0.25rem;
-				text-align: center;
 			}
-
 		`];
 	}
 
