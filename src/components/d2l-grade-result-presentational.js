@@ -38,8 +38,6 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 				flex-direction: row;
 				align-items: center;
 			}
-			.d2l-grade-result-presentational-title-container {
-			}
 			.d2l-grade-result-presentational-subtitle {
 				margin-top: -4px;
 				margin-bottom: 4px;
@@ -179,7 +177,7 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 
 	render() {
 		return html`
-			<div class="d2l-grade-result-presentational-title-container">
+			<div>
 				${this._renderTitle()}
 			</div>
 

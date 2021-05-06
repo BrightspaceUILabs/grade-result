@@ -39,6 +39,7 @@ export class D2LGradeResultIconButton extends LitElement {
 					<d2l-tooltip
 						for="d2l-grade-result-icon-button-${this._id}"
 						position="bottom"
+						align="start"
 					>
 						${this.tooltipText}
 					</d2l-tooltip>
