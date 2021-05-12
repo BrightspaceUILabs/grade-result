@@ -59,7 +59,7 @@ export class D2LGradeResultNumericScore extends LitElement {
 				${!this.readOnly ? html`
 					<div class="d2l-grade-result-numeric-score-score">
 						<d2l-input-number
-							label="Grade Score"
+							label="Grade Score ${this.scoreNumerator || 'blank'} out of ${this.scoreDenominator || 'blank'}"
 							label-hidden
 							value="${this.scoreNumerator}"
 							min="0"
