@@ -75,7 +75,6 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 							value="${this.scoreNumerator}"
 							min="0"
 							max-fraction-digits="2"
-							novalidate
 							@change=${this._onGradeChange}
 						></d2l-input-number>
 					</div>
