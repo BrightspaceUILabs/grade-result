@@ -60,7 +60,7 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 	render() {
 		let inputNumberLabel;
 		if (!this.scoreDenominator) {
-			inputNumberLabel = this.localize('GradeScoreLabel', { numerator: this.scoreNumerator || 'blank' });
+			inputNumberLabel = this.localize('gradeScoreLabel', { numerator: this.scoreNumerator || 'blank' });
 		} else {
 			inputNumberLabel = this.localize('fullGradeScoreLabel', { numerator: this.scoreNumerator || 'blank', denominator: this.scoreDenominator });
 		}
