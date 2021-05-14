@@ -4,11 +4,10 @@ import './d2l-grade-result-letter-score.js';
 import '@brightspace-ui/core/components/button/button-subtle.js';
 import { css, html, LitElement } from 'lit-element';
 import { bodySmallStyles } from '@brightspace-ui/core/components/typography/styles.js';
-import getLocalizationTranslations from './locale.js';
 import { GradeType } from '../controller/Grade.js';
-import { LocalizeMixin } from '@brightspace-ui/core/mixins/localize-mixin.js';
+import { LocalizeGradeResult } from '../../localize-grade-result.js';
 
-export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
+export class D2LGradeResultPresentational extends LocalizeGradeResult(LitElement) {
 	static get properties() {
 		return {
 			gradeType: { type: String },
@@ -43,9 +42,6 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 				margin-bottom: 4px;
 			}
 		`];
-	}
-	static async getLocalizeResources(langs) {
-		return await getLocalizationTranslations(langs);
 	}
 
 	constructor() {

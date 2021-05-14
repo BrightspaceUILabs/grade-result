@@ -1,11 +1,10 @@
 import '@brightspace-ui/core/components/inputs/input-number';
 import { bodyStandardStyles, labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { css, html, LitElement } from 'lit-element';
-import getLocalizationTranslations from './locale.js';
 import { inputLabelStyles } from '@brightspace-ui/core/components/inputs/input-label-styles.js';
-import { LocalizeMixin } from '@brightspace-ui/core/mixins/localize-mixin.js';
+import { LocalizeGradeResult } from '../../localize-grade-result.js';
 
-export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
+export class D2LGradeResultNumericScore extends LocalizeGradeResult(LitElement) {
 	static get properties() {
 		return {
 			scoreNumerator: { type: Number },
@@ -43,9 +42,6 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 			}
 		`];
 	}
-	static async getLocalizeResources(langs) {
-		return await getLocalizationTranslations(langs);
-	}
 
 	_onGradeChange(e) {
 		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-change', {
@@ -60,9 +56,9 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 	render() {
 		let inputNumberLabel;
 		if (!this.scoreDenominator) {
-			inputNumberLabel = this.localize('GradeScoreLabel', { numerator: this.scoreNumerator || 'blank' })
+			inputNumberLabel = this.localize('GradeScoreLabel', { numerator: this.scoreNumerator || 'blank' });
 		} else {
-			inputNumberLabel = this.localize('fullGradeScoreLabel', { numerator: this.scoreNumerator || 'blank', denominator: this.scoreDenominator })
+			inputNumberLabel = this.localize('fullGradeScoreLabel', { numerator: this.scoreNumerator || 'blank', denominator: this.scoreDenominator });
 		}
 		return html`
 			<div class="d2l-grade-result-numeric-score-container">
