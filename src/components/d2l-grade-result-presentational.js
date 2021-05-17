@@ -44,6 +44,7 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 			}
 		`];
 	}
+
 	static async getLocalizeResources(langs) {
 		return await getLocalizationTranslations(langs);
 	}
