@@ -74,6 +74,7 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 							label-hidden
 							value="${this.scoreNumerator}"
 							min="0"
+							max="9999999999"
 							max-fraction-digits="2"
 							@change=${this._onGradeChange}
 						></d2l-input-number>
