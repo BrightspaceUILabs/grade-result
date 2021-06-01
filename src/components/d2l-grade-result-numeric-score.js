@@ -79,7 +79,6 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 							@change=${this._onGradeChange}
 						></d2l-input-number>
 					</div>
-
 					<div class="d2l-grade-result-numeric-score-score-text">
 						${!isNaN(this.scoreDenominator) ? html`
 							<span class="d2l-body-standard">/ ${this.scoreDenominator}</span>
