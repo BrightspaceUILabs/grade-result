@@ -27,6 +27,10 @@ describe('write enabled visual diff tests', () => {
 		await testDiff(visualDiff, page, '#write-enabled-number-grade-no-icons', this.test.fullTitle());
 	});
 
+	it('write-enabled-number-decimal-grade-no-icons', async function() {
+		await testDiff(visualDiff, page, '#write-enabled-number-decimal-grade-no-icons', this.test.fullTitle());
+	});
+
 	it('write-enabled-number-grade-icons', async function() {
 		await testDiff(visualDiff, page, '#write-enabled-number-grade-icons', this.test.fullTitle());
 	});
