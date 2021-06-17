@@ -59,10 +59,11 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 
 	render() {
 		let inputNumberLabel;
+		const roundedNumerator = Math.round((this.scoreNumerator + Number.EPSILON) * 100) / 100;
 		if (!this.scoreDenominator) {
-			inputNumberLabel = this.localize('gradeScoreLabel', { numerator: this.scoreNumerator || 'blank' });
+			inputNumberLabel = this.localize('gradeScoreLabel', { numerator: roundedNumerator || 'blank' });
 		} else {
-			inputNumberLabel = this.localize('fullGradeScoreLabel', { numerator: this.scoreNumerator || 'blank', denominator: this.scoreDenominator });
+			inputNumberLabel = this.localize('fullGradeScoreLabel', { numerator: roundedNumerator || 'blank', denominator: this.scoreDenominator });
 		}
 		return html`
 			<div class="d2l-grade-result-numeric-score-container">
@@ -86,7 +87,7 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 					</div>
 				` : html`
 					<div class="d2l-grade-result-numeric-score-score-read-only">
-						<span class="d2l-body-standard">${this.scoreNumerator ? this.scoreNumerator : 0} / ${this.scoreDenominator}</span>
+						<span class="d2l-body-standard">${this.scoreNumerator ? roundedNumerator : 0} / ${this.scoreDenominator}</span>
 					</div>
 				`}
 
