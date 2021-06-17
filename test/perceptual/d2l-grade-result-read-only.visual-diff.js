@@ -27,6 +27,10 @@ describe('read only visual diff tests', () => {
 		await testDiff(visualDiff, page, '#read-only-number-grade-no-icons', this.test.fullTitle());
 	});
 
+	it('read-only-number-decimal-grade-no-icons', async function() {
+		await testDiff(visualDiff, page, '#read-only-number-decimal-grade-no-icons', this.test.fullTitle());
+	});
+
 	it('read-only-number-grade-icons', async function() {
 		await testDiff(visualDiff, page, '#read-only-number-grade-icons', this.test.fullTitle());
 	});
